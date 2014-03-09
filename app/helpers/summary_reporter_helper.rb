@@ -68,51 +68,57 @@ module SummaryReporterHelper
       #p jsonLookupData["results"][0]["userRatingCount"]
     end
     
-    def artWorkUrl
-      if @summary["results"][0].has_key?("artworkUrl60")
-        return @summary["results"][0]["artworkUrl60"]
+    def artWorkUrl(context)
+      summary=context.summary
+      if summary["results"][0].has_key?("artworkUrl60")
+        return summary["results"][0]["artworkUrl60"]
       else
-        return "NK"  
+        return "NA"  
       end
     end
     
-    def artistName
-      if @summary["results"][0].has_key?("artistName")
-        return @summary["results"][0]["artistName"]
+    def artistName(context)
+      summary=context.summary
+      if summary["results"][0].has_key?("artistName")
+        return summary["results"][0]["artistName"]
       else
-        return "NK"  
+        return "NA"  
       end
     end
     
-    def description
-      if @summary["results"][0].has_key?("description")
-        return @summary["results"][0]["description"]
+    def description(context)
+      summary=context.summary
+      if summary["results"][0].has_key?("description")
+        return summary["results"][0]["description"]
       else
-        return "NK"  
+        return "NA"  
       end
     end
     
-    def averageUserRating
-      if @summary["results"][0].has_key?("averageUserRating")
-        return @summary["results"][0]["averageUserRating"]
+    def averageUserRating(context)
+      summary=context.summary
+      if summary["results"][0].has_key?("averageUserRating")
+        return summary["results"][0]["averageUserRating"]
       else
-        return "NK"  
+        return "NA"  
       end
     end
     
-    def userRatingCount
-      if @summary["results"][0].has_key?("userRatingCount")
-        return @summary["results"][0]["userRatingCount"]
+    def userRatingCount(context)
+      summary=context.summary
+      if summary["results"][0].has_key?("userRatingCount")
+        return summary["results"][0]["userRatingCount"]
       else
-        return "NK"  
+        return "NA"  
       end
     end
     
-    def averageUserRatingForCurrentVersion
-      if @summary["results"][0].has_key?("averageUserRatingForCurrentVersion")
-        return @summary["results"][0]["averageUserRatingForCurrentVersion"]
+    def averageUserRatingForCurrentVersion(context)
+      summary=context.summary
+      if summary["results"][0].has_key?("averageUserRatingForCurrentVersion")
+        return summary["results"][0]["averageUserRatingForCurrentVersion"]
       else
-        return "NK"  
+        return "NA"  
       end
     end
     
@@ -121,7 +127,7 @@ module SummaryReporterHelper
       if summary["results"][0].has_key?("userRatingCountForCurrentVersion")
         return summary["results"][0]["userRatingCountForCurrentVersion"]
       else
-        return "NK"  
+        return "NA"  
       end
     end   
   end    
