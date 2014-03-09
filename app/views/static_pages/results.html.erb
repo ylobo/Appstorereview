@@ -1,0 +1,26 @@
+<% provide(:title, 'Results')%>
+<%= form_tag "/results" do %>
+<div class="row-fluid">
+	<div class="span5" align="left">
+  	<%= text_field_tag 'query1', params[:query]||params[:query1], :placeholder =>'Enter your apps bundle name here' %>
+	</div>	
+	<div class="span2">
+		<%= select_tag "options[]", options_for_select(storeOptions().collect {|x| [x]})%>
+	</div>
+	<div class="span4">
+	 <%= submit_tag "Search", class: "btn btn-large btn-small" %>
+	 </div>
+</div>
+<div class="container-fluid" align=left>
+  <div class="row-fluid" >
+    <div class="span3" >
+      <!--Sidebar content-->
+      <%= render 'shared/display_summary' %>
+    </div>  
+    <div class="span9" align=right>
+      <!--Body content-->
+      <%= submit_tag "Search", class: "btn btn-large btn-small" %>
+    </div>
+  </div>
+</div>
+<% end %>

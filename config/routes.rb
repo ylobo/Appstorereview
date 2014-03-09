@@ -1,4 +1,9 @@
 AppStoreReviews::Application.routes.draw do
+  #get "static_pages/home"
+  resources :sessions, only: [:new, :create, :destroy]
+  match '/signin', to: 'sessions#new'
+  root :to => 'static_pages#home'
+  match '/results', to: 'static_pages#results'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

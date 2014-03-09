@@ -1,0 +1,17 @@
+<% provide(:title, 'App Review')%>
+<h1>Search for your app reviews</h1>
+
+<%= form_tag "/results" do %>
+  <div class="controls controls-row">
+	<div class="span6 offset2">
+		<%= text_field_tag 'query', nil, :placeholder =>'Enter your apps bundle name here' %>
+	</div>	
+	<div class="span2 offset3">
+		<%= select_tag "options[]", options_for_select(storeOptions().collect {|x| [x]})%>
+	</div>
+</div>	
+<div class="span4 offset4" align="right">
+	 <%= submit_tag "Search", class: "btn btn-large btn-primary" %>
+</div>
+<% end %>
+

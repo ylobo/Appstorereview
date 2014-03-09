@@ -1,0 +1,13 @@
+<header class="navbar navbar-fixed-top navbar-inverse">
+		<div class="navbar-inner">
+			<div class="container">
+				<%= link_to "Mobile App Review",root_path,id: "logo"%>
+				<nav>
+					<ul class="nav pull-right">
+							<li ><%= link_to "Sign in", signin_path , "data-target"=>"#my-modal","data-toggle" => "modal"%>
+							<li><%= link_to "Open modal", "#my-modal", "data-toggle" => "modal" %></li>
+					</ul>	
+				</nav>
+			</div>	
+		</div>	
+	</header>
