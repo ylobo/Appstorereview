@@ -45,6 +45,10 @@ module SummaryReporterHelper
     def userRatingCountForCurrentVersion
       #raise 'Abstract method called'
       @appstore.userRatingCountForCurrentVersion(self)
+    end
+    
+    def foundResult
+      @appstore.foundResult(self) 
     end              
   end
   
@@ -53,7 +57,12 @@ module SummaryReporterHelper
     def getSummary(context)
       appId=context.id
       #appId=354539557
-      uri=URI.parse("https://itunes.apple.com/lookup?id=#{appId}")
+      if appId.is_a?Fixnum
+        uri=URI.parse("https://itunes.apple.com/lookup?id=#{appId}")
+      else
+        uri=URI.encode("https://itunes.apple.com/search?term=#{appId}&entity=software,iPadSoftware")
+        uri=URI.parse(uri)
+      end  
       http= Net::HTTP.new(uri.host,uri.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -129,7 +138,16 @@ module SummaryReporterHelper
       else
         return "NA"  
       end
-    end   
+    end 
+    
+    def foundResult(context)
+      summary=context.summary
+      if (summary["resultCount"]!=0)
+        return true
+      else
+        return false  
+      end
+    end    
   end    
 
   class GoogleStoreSummary

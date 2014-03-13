@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  
+  attr_accessor :errorMessage
   def home
     @reviews=[]
     #flash[:success]=params[:query]
@@ -19,13 +19,18 @@ class StaticPagesController < ApplicationController
       when "Apple Store"   
         report = SummaryReporterHelper::Summary.new(SummaryReporterHelper::AppleStoreSummary.new,params[:query]||params[:query1])
         report.getSummary
-        @userRatingCountForCurrentVersion=report.userRatingCountForCurrentVersion
-        @averageUserRatingForCurrentVersion=report.averageUserRatingForCurrentVersion
-        @averageUserRating=report.averageUserRating
-        @userRatingCount=report.userRatingCount
-        @artworkUrl60=report.artWorkUrl
-        @artistName=report.artistName
-        @artWorkUrl=report.artWorkUrl
+        if report.foundResult
+          @userRatingCountForCurrentVersion=report.userRatingCountForCurrentVersion
+          @averageUserRatingForCurrentVersion=report.averageUserRatingForCurrentVersion
+          @averageUserRating=report.averageUserRating
+          @userRatingCount=report.userRatingCount
+          @artworkUrl60=report.artWorkUrl
+          @artistName=report.artistName
+          @artWorkUrl=report.artWorkUrl
+        else
+          flash[:notice] = "No Results Found"
+          redirect_to root_url
+        end    
       when "Google Store" 
         report = SummaryReporterHelper::Summary.new(SummaryReporterHelper::GoogleStoreSummary.new,params[:query]||params[:query1])
         report.getSummary
@@ -33,8 +38,9 @@ class StaticPagesController < ApplicationController
        flash.now[:success]=params[:options]
       end  
      else
-       redirect_to root_path
-       flash.now[:error] = "Query field cannot be left empty"
+       
+    flash[:notice] = "You have successfully logged out."
+    redirect_to root_url
      end  
   end
 end

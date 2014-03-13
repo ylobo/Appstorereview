@@ -1,13 +1,37 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
-		<div class="navbar-inner">
-			<div class="container">
-				<%= link_to "Mobile App Review",root_path,id: "logo"%>
-				<nav>
-					<ul class="nav pull-right">
-							<li ><%= link_to "Sign in", signin_path , "data-target"=>"#my-modal","data-toggle" => "modal"%>
-							<li><%= link_to "Open modal", "#my-modal", "data-toggle" => "modal" %></li>
-					</ul>	
-				</nav>
-			</div>	
-		</div>	
-	</header>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to "Mobile App Review",root_path,id: "logo", class: "navbar-brand"%>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      
+      <form class="navbar-form navbar-left" role="search" action="/results" method="post">
+      	<div class="form-group">	
+          <%= text_field_tag 'query1', params[:query]||params[:query1], :placeholder =>'Enter your apps bundle name here', class: 'form-control' %> 
+          <%= select_tag "options[]", options_for_select(storeOptions().collect {|x| [x]}),class: 'form-control' %>
+       </div>
+       
+		<%= submit_tag "Search", class: "btn btn-default" %>	
+        
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="/" class="dropdown-toggle" data-toggle="dropdown">Sign In <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+          	<li><a href="/">Sign In</a></li>
+            <li><a href="#">Sign Up</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
